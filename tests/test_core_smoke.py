@@ -1,12 +1,11 @@
 from pathlib import Path
-import numpy as np
+
 from stackshift.adapters.lowrank_affine import LowRankAffineAdapter
 from stackshift.adapters.procrustes import ProcrustesAdapter
 from stackshift.adapters.residual_mlp import ResidualMLPAdapter
 from stackshift.artifacts.store import load_artifact, save_artifact
 from stackshift.connectors.base import InMemoryVectorStore
 from stackshift.embedders.base import HashEmbedder
-from stackshift.eval.labeled import labeled_retention
 from stackshift.eval.metrics import ndcg_at_k, neighbor_overlap, recall_at_k, retention
 from stackshift.eval.neighbor_overlap import average_retrieval_recovery
 from stackshift.pairing import PairingBuilder
@@ -48,7 +47,7 @@ def test_core_end_to_end(tmp_path: Path) -> None:
     router = QueryRouter(embedder, store, CachedStateReader(backend, 5), adapter)
     assert router.search("document 1", 3)
     assert average_retrieval_recovery([["a"]], [["a"]]) == 1.0
-    assert evaluate_overlap([["a"]], [["a"]], 10).recommendation == "adapter-migration"
+    assert evaluate_overlap([["a"]], [["a"]], 10).recommendation.decision == "adapter-migration"
     assert (
         neighbor_overlap(["a"], ["a"])
         == recall_at_k(["a"], {"a"})

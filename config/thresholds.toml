@@ -1,0 +1,8 @@
+status = "provisional"
+version = "2026-10-23"
+provenance = "Pre-Gate-1 defaults from StackShift master build specification"
+calibrated_from = "NOT CALIBRATED: requires Gate 1 benchmark data"
+neighbor_overlap_adapter_floor = 0.95
+neighbor_overlap_drastic_drift_floor = 0.70
+labeled_retention_adapter_floor = 0.95
+labeled_retention_minimum = 0.90

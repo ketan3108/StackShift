@@ -49,7 +49,11 @@ files = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "-q --cov=stackshift --cov-report=term-missing --cov-fail-under=85"
+addopts = "-q --cov=stackshift --cov-report=term-missing --cov-fail-under=90"
+markers = [
+  "integration: requires a local service container",
+  "api: requires explicit provider credentials",
+]
 
 [tool.coverage.run]
 branch = true
@@ -58,6 +62,7 @@ source = ["stackshift"]
 [tool.coverage.report]
 show_missing = true
 fail_under = 85
+
 
 
 

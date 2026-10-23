@@ -39,4 +39,3 @@ def test_audit_writes_json_line(tmp_path: Path) -> None:
     destination = tmp_path / "audit.jsonl"
     write_audit_event(destination, "train", {"adapter": "v1"})
     assert '"action": "train"' in destination.read_text(encoding="utf-8")
-
