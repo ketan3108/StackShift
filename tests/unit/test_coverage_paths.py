@@ -60,7 +60,7 @@ def test_pairing_preconditions_and_split_edges() -> None:
 
 def test_artifact_tamper_and_state_failure(tmp_path: Path) -> None:
     meta = save_artifact(tmp_path, "v", np.eye(3, dtype=np.float32), "old", "new")
-    file = tmp_path / "v.npy"
+    file = tmp_path / "v.safetensors"
     file.write_bytes(file.read_bytes() + b"tamper")
     with pytest.raises(ArtifactIntegrityError):
         load_artifact(tmp_path, meta.version)

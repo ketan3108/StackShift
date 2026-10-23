@@ -23,6 +23,8 @@ dependencies = [
 qdrant = ["qdrant-client>=1.12,<2"]
 faiss = ["faiss-cpu>=1.9,<2"]
 openai = ["openai>=1.58,<3"]
+local = ["sentence-transformers>=3.3,<4"]
+all = ["stackshift[qdrant,faiss,openai,local,ml]"]
 ml = ["numpy>=2.0,<3", "scipy>=1.14,<2", "torch>=2.5,<3", "safetensors>=0.5,<1", "sentence-transformers>=3.3,<4"]
 dev = ["mypy>=1.14,<2", "pytest>=8.3,<9", "pytest-cov>=6,<7", "ruff>=0.9,<1", "hypothesis>=6.122,<7", "pre-commit>=4.0,<5", "pip-audit>=2.8,<3"]
 
@@ -39,7 +41,7 @@ src = ["src"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM"]
-ignore = ["E501", "E701"]
+ignore = ["E501", "E701", "E702"]
 
 [tool.mypy]
 python_version = "3.13"
