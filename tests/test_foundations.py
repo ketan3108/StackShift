@@ -17,10 +17,10 @@ def test_version_and_help_are_available() -> None:
     assert "cutover" in result.output
 
 
-def test_gated_command_exits_nonzero() -> None:
+def test_scan_command_is_available() -> None:
     result = CliRunner().invoke(app, ["scan"])
-    assert result.exit_code == 2
-    assert "not available" in result.output
+    assert result.exit_code == 0
+    assert "metric_mode" in result.output
 
 
 def test_ttl_bounds_are_validated() -> None:
@@ -39,3 +39,4 @@ def test_audit_writes_json_line(tmp_path: Path) -> None:
     destination = tmp_path / "audit.jsonl"
     write_audit_event(destination, "train", {"adapter": "v1"})
     assert '"action": "train"' in destination.read_text(encoding="utf-8")
+
