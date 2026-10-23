@@ -21,7 +21,7 @@ dependencies = [
 
 [project.optional-dependencies]
 qdrant = ["qdrant-client>=1.12,<2"]
-faiss = ["faiss-cpu>=1.9,<2"]
+faiss = ["faiss-cpu>=1.15.1,<2"]
 openai = ["openai>=1.58,<3"]
 local = ["sentence-transformers>=3.3,<4"]
 all = ["stackshift[qdrant,faiss,openai,local,ml]"]
