@@ -1,0 +1,57 @@
+[build-system]
+requires = ["hatchling>=1.27"]
+build-backend = "hatchling.build"
+
+[project]
+name = "stackshift"
+version = "0.0.1"
+description = "Measure embedding-model drift and safely defer an index rebuild."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "License pending product decision; see LICENSE." }
+authors = [{ name = "StackShift contributors" }]
+dependencies = [
+  "pydantic>=2.10,<3",
+  "structlog>=24.4,<26",
+  "typer>=0.15,<1",
+  "rich>=13.9,<15",
+]
+
+[project.optional-dependencies]
+qdrant = ["qdrant-client>=1.12,<2"]
+faiss = ["faiss-cpu>=1.9,<2"]
+openai = ["openai>=1.58,<3"]
+ml = ["numpy>=2.0,<3", "scipy>=1.14,<2", "torch>=2.5,<3", "safetensors>=0.5,<1", "sentence-transformers>=3.3,<4"]
+dev = ["mypy>=1.14,<2", "pytest>=8.3,<9", "pytest-cov>=6,<7", "ruff>=0.9,<1", "hypothesis>=6.122,<7", "pre-commit>=4.0,<5"]
+
+[project.scripts]
+stackshift = "stackshift.cli.app:app"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stackshift"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unused_ignores = true
+files = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --cov=stackshift --cov-report=term-missing --cov-fail-under=85"
+
+[tool.coverage.run]
+branch = true
+source = ["stackshift"]
+
+[tool.coverage.report]
+show_missing = true
+fail_under = 85
